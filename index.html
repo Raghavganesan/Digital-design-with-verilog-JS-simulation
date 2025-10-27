@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALU Visualizer</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <div class="header-section">
+  <h1>⚙️ Digital ALU Visualizer</h1>
+  <h2 class="section-title">💡 About This Simulator</h2>
+
+  <p class="subtitle">
+    This interactive simulator demonstrates how a digital <b>Arithmetic Logic Unit (ALU)</b> performs
+    fundamental operations such as <b>addition</b>, <b>subtraction</b>, <b>AND</b>, <b>OR</b>, <b>XOR</b>, 
+    and more. You can toggle between <b>4-bit</b> and <b>8-bit</b> modes, visualize binary inputs and results,
+    and observe CPU flags like <span class="flagtext">Carry</span>, 
+    <span class="flagtext">Zero</span>, and <span class="flagtext">Overflow</span> in real time.
+  </p>
+</div>
+  <div class="alu-panel">
+
+  <!-- MODE SELECTION -->
+  <div class="alu-row">
+    <label for="mode">Select ALU Mode :</label>
+    <select id="mode">
+      <option value="4bit">4-Bit</option>
+      <option value="8bit">8-Bit</option>
+    </select>
+  </div>
+
+  <!-- INPUTS A & B -->
+  <div class="alu-row">
+    <input type="number" id="A" placeholder="Enter A" min="0" max="255" />
+    <input type="number" id="B" placeholder="Enter B" min="0" max="255" />
+  </div>
+
+  <!-- BINARY DISPLAY -->
+  <div id="binaryDisplay" class="binary-display">
+    <p><b>A (Binary):</b> <span id="A_bin">0000</span></p>
+    <p><b>B (Binary):</b> <span id="B_bin">0000</span></p>
+  </div>
+
+  <!-- OPERATION SELECT + RUN BUTTON -->
+  <div class="alu-row">
+    <select id="SEL">
+      <option value="000">Addition</option>
+      <option value="001">Subtraction</option>
+      <option value="010">AND</option>
+      <option value="011">OR</option>
+      <option value="100">XOR</option>
+      <option value="101">NOT (A)</option>
+      <option value="110">Increment A</option>
+      <option value="111">Decrement A</option>
+    </select>
+    <button onclick="runALU()">Run ALU</button>
+  </div>
+</div>
+
+    <br>
+    <div class="sim-panel">
+  <div class="result-box" id="resultBox">
+    <div class="panel-title">⚙️ ALU OUTPUT PANEL</div>
+    <div class="panel-content">
+      Result will appear here...
+    </div>
+  </div>
+
+  <div class="flag-panel">
+  <div id="flags">
+    <div id="carryFlag" class="flag off" data-tooltip="Carry: Indicates an unsigned overflow beyond the maximum value."></div>
+    <div id="zeroFlag" class="flag off" data-tooltip="Zero: Lights up when the ALU output result equals zero."></div>
+    <div id="overflowFlag" class="flag off" data-tooltip="Overflow: Shows signed overflow when result exceeds representable range."></div>
+  </div>
+  <div class="flag-labels">
+    <span>Carry</span>
+    <span>Zero</span>
+    <span>Overflow</span>
+  </div>
+</div>
+</div>
+    <!-- =========================================================
+         ⚙️ CYBER FOOTER SECTION
+         ========================================================= -->
+    <footer class="footer-section">
+      <div class="footer-glow"></div>
+      <p class="footer-text">
+        ⚡ Digital ALU Visualizer made by
+        <span class="author-name">Raghavendran GANESAN</span> © 2025
+      </p>
+    </footer>
+
+
+</body>
+<script src="script.js"></script>
+</html>

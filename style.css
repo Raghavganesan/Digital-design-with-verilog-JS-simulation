@@ -1,0 +1,619 @@
+/* =========================================================
+  
+   1. BASE PAGE STYLES
+   ========================================================= */
+body {
+  background: radial-gradient(circle at top, #0a0a0a, #121212 70%);
+  color: #e6ffff;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  color: #00ffff;
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 15px #00ffffaa;
+  margin-bottom: 10px;
+  letter-spacing: 1.2px;
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 5px #00ffff66;
+  }
+  100% {
+    text-shadow: 0 0 20px #00ffffaa;
+  }
+}
+
+/* =========================================================
+   2. BACKGROUND EFFECTS (CYBER GRID & GLOW)
+   ========================================================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 255, 255, 0.12) 1px,
+      transparent 1px
+    ),
+    linear-gradient(0deg, rgba(0, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: gridDrift 25s linear infinite;
+  z-index: -2;
+  opacity: 0.45;
+  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 0.3));
+}
+
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  50% {
+    background-position: 40px 40px, 40px 40px;
+  }
+  100% {
+    background-position: 80px 80px, 80px 80px;
+  }
+}
+
+/* Faint PCB-style glow overlays */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(0, 255, 255, 0.15),
+      transparent 70%
+    ),
+    radial-gradient(circle at 70% 80%, rgba(0, 255, 255, 0.1), transparent 70%),
+    radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05), transparent 80%);
+  background-blend-mode: screen;
+  opacity: 0.6;
+  z-index: -1;
+  animation: pulsePCB 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulsePCB {
+  0% {
+    opacity: 0.3;
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 0.7;
+    filter: blur(1px);
+  }
+}
+
+/* =========================================================
+   3. HEADER SECTION (TITLE + DESCRIPTION)
+   ========================================================= */
+.header-section {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 40px 25px 30px;
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(0, 255, 255, 0.04),
+    rgba(0, 100, 100, 0.05)
+  );
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title {
+  font-size: 18px;
+  color: #00ffcc;
+  margin-bottom: 12px;
+  text-shadow: 0 0 8px #00ffffaa;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #b8ffff;
+  line-height: 1.7;
+  text-align: center;
+  background: rgba(0, 255, 255, 0.03);
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px 25px;
+}
+
+.flagtext {
+  color: #00ffaa;
+  font-weight: 600;
+}
+
+/* =========================================================
+   4. ALU PANEL (INPUTS, DROPDOWNS, RUN BUTTON)
+   ========================================================= */
+   /* =========================================================
+   LABEL STYLING (CYBER NEON STYLE)
+   ========================================================= */
+label {
+  display: inline-block;
+  color: #00ffff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+  margin-right: 8px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  font-size: 17px;
+}
+
+label:hover {
+  color: #00ffaa;
+  text-shadow: 0 0 10px rgba(0, 255, 170, 0.8);
+  transform: scale(1.02);
+}
+
+/* To keep label + select aligned horizontally */
+.alu-panel label + select,
+.alu-panel label + input {
+  margin-left: 5px;
+}
+
+.alu-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+/* =========================================================
+   ALU ROW ALIGNMENT (HORIZONTAL FORM CONTROLS)
+   ========================================================= */
+.alu-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 8px 0;
+  flex-wrap: wrap; /* Ensures proper behavior on small screens */
+}
+
+.alu-row select,
+.alu-row input,
+.alu-row button {
+  margin: 0; /* remove extra margins */
+}
+
+.alu-row label {
+  min-width: 160px;
+  text-align: right;
+}
+
+
+.input-section {
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+/* Inputs & Buttons */
+select,
+input,
+button {
+  padding: 10px 15px;
+  margin: 8px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  background: #1e1e1e;
+  color: #00ffff;
+  outline: none;
+  transition: 0.3s;
+}
+
+select:hover,
+input:focus {
+  box-shadow: 0 0 8px #00ffff55;
+}
+
+button {
+  background: #00bfff;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0077b6;
+  transform: scale(1.05);
+}
+
+/* Reduce top gaps */
+#mode,
+#A,
+#B,
+#SEL,
+button {
+  margin-top: 5px;
+}
+
+/* =========================================================
+   5. BINARY DISPLAY SECTION
+   ========================================================= */
+.binary-display {
+  background: #1e1e1e;
+  margin: 15px auto;
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #00ffff;
+  text-align: left;
+  line-height: 1.6;
+  box-shadow: inset 0 0 10px #00ffff33;
+}
+
+.binary-display p {
+  margin: 5px 0;
+}
+
+/* =========================================================
+   6. RESULT BOX (OUTPUT PANEL)
+   ========================================================= */
+.result-box {
+  margin-top: 25px;
+  display: inline-block;
+  background: linear-gradient(145deg, #111, #0a0a0a);
+  border: 2px solid #00ffff44;
+  border-radius: 12px;
+  padding: 18px 40px;
+  text-align: left;
+  font-size: 18px;
+  color: #e0f7ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+  width: 360px;
+}
+
+.result-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, #00ffff33, transparent);
+}
+
+.result-box b,
+.result-box span {
+  font-family: "Courier New", monospace;
+  color: #00ffee;
+  text-shadow: 0 0 4px #00ffff;
+}
+
+.result-box b {
+  color: #00ffff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.result-box:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.result-box pre {
+  font-family: "Courier New", monospace;
+  margin: 0;
+}
+
+/* =========================================================
+   7. FLAG PANEL (CARRY / ZERO / OVERFLOW)
+   ========================================================= */
+.flag-panel {
+  margin-top: 25px;
+  background: #101010;
+  display: inline-block;
+  border-radius: 15px;
+  padding: 20px 40px;
+  border: 1px solid #00ffff33;
+  box-shadow: inset 0 0 15px #00ffff22;
+  width: 360px;
+}
+
+#flags {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 10px;
+}
+
+.flag {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 30%, #2b2b2b, #0e0e0e);
+  border: 2px solid #00ffff55;
+  box-shadow: inset 0 0 6px #000;
+  transition: all 0.3s ease;
+}
+
+.flag.on {
+  background: radial-gradient(circle at 30% 30%, #00ffaa, #007755);
+  box-shadow: 0 0 15px #00ffaa;
+  color: #0a0a0a;
+  text-shadow: 0 0 3px #00ffee;
+  transition: box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.flag.off {
+  background: radial-gradient(circle at 30% 30%, #333, #121212);
+  border: 2px solid #333;
+  color: #888;
+}
+
+.flag-labels {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  color: #00ffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* =========================================================
+   8. PANEL TITLES (SHARED)
+   ========================================================= */
+.panel-title {
+  text-align: center;
+  font-weight: 700;
+  color: #00ffff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  text-shadow: 0 0 6px #00ffff;
+}
+
+.panel-content {
+  margin-top: 10px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   9. RESPONSIVE DESIGN (TABLET / MOBILE)
+   ========================================================= */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 24px;
+  }
+  .result-box,
+  .flag-panel {
+    width: 320px;
+  }
+  select,
+  input,
+  button {
+    font-size: 15px;
+    padding: 8px 12px;
+  }
+  .binary-display {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 25px;
+  }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .header-section {
+    padding: 25px 20px;
+    margin-bottom: 30px;
+  }
+  .subtitle {
+    font-size: 15px;
+    padding: 12px 18px;
+  }
+
+  .result-box,
+  .flag-panel {
+    width: 90%;
+    margin: 10px auto;
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+
+  .flag {
+    width: 55px;
+    height: 55px;
+    font-size: 12px;
+  }
+
+  .flag-labels {
+    gap: 35px;
+    font-size: 13px;
+  }
+
+  select,
+  input,
+  button {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .binary-display {
+    width: 85%;
+    text-align: center;
+  }
+
+  .panel-title {
+    font-size: 16px;
+  }
+  .result-box b,
+  .result-box span {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .flag {
+    width: 45px;
+    height: 45px;
+  }
+  .flag-labels {
+    gap: 25px;
+    font-size: 12px;
+  }
+  .panel-title {
+    font-size: 15px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 280px;
+    padding: 10px;
+  }
+
+  .binary-display {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .result-box,
+  .flag-panel {
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+  .result-box::before {
+    height: 4px;
+  }
+}
+/* =========================================================
+   FLAG TOOLTIP (CYBER THEME)
+   ========================================================= */
+.flag {
+  position: relative;
+}
+
+/* Tooltip styling */
+.flag::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 255, 255, 0.08);
+  color: #aaffff;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  border-radius: 10px;
+  font-size: 13px;
+  padding: 6px 10px;
+  width: 220px;
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+/* Glow animation on hover */
+.flag:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px);
+  text-shadow: 0 0 5px #00ffff;
+}
+
+/* Optional: smooth glow around active flags */
+.flag.on {
+  animation: pulseGlow 1.5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 8px #00ffaa; }
+  100% { box-shadow: 0 0 18px #00ffaa; }
+}
+
+/* =========================================================
+   10. CYBER FOOTER SECTION
+   ========================================================= */
+.footer-section {
+  margin-top: 60px;
+  padding: 25px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 255, 255, 0.03);
+  border-top: 1px solid rgba(0, 255, 255, 0.15);
+  box-shadow: 0 -2px 15px rgba(0, 255, 255, 0.1);
+}
+
+/* subtle moving glow background */
+.footer-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 255, 255, 0.15), transparent 70%),
+              radial-gradient(circle at 80% 100%, rgba(0, 255, 255, 0.1), transparent 80%),
+              radial-gradient(circle at 20% 100%, rgba(0, 255, 255, 0.1), transparent 80%);
+  background-blend-mode: screen;
+  opacity: 0.5;
+  animation: footerPulse 10s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+/* text styling */
+.footer-text {
+  color: #b8ffff;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  font-weight: 500;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+  position: relative;
+  z-index: 1;
+}
+
+.author-name {
+  color: #00ffaa;
+  font-weight: 700;
+  text-shadow: 0 0 8px #00ffaa;
+}
+
+@keyframes footerPulse {
+  0% { opacity: 0.4; filter: blur(0.5px); }
+  100% { opacity: 0.7; filter: blur(1.2px); }
+}
